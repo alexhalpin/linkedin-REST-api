@@ -1,5 +1,7 @@
 licookies.txt
-
+scratch.py
+venv/
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
