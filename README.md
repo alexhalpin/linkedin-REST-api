@@ -35,7 +35,7 @@ job = api.search_jobs('software engineer', location='Palo Alto', page=0)[0]
 ```
 People Search: (returns a list of people)
 ```python
-person = api.search_people('CEO', companyid='112834', page=0)
+person = api.search_people('CEO', companyid='112834', page=0)[0]
 
 # {
 #     'link': 'https://www.linkedin.com/in/richard-hendricks-82872349',
