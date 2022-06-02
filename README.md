@@ -2,7 +2,7 @@
 # LinkedIn REST Unofficial API (python)
 
 A simple unofficial LinkedIn python api providing basic LinkedIn functionality.
-
+Programmatically find jobs and search for/connect with other users with python 'requests'.
 
 
 ## Setup
