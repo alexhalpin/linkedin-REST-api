@@ -8,7 +8,7 @@ Programmatically find jobs and search for/connect with other users with python '
 ## Setup
 
 Login to LinkedIn in your browser and use a tool like the "Get cookies.txt" chrome addon to save a Netscape format cookie file. 
-This file path will be referenced in instantiations of the LinedInApi class.
+This file path will be referenced in instantiations of the LinkedInApi class.
 
 
 ## Usage/Examples
