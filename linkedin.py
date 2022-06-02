@@ -1,7 +1,7 @@
 import requests
 import http.cookiejar as cookielib
 
-class LinkedinApi:
+class LinkedInApi:
     def __init__(self, cookiepath):
         """
             instantiate a linkedinapi object
