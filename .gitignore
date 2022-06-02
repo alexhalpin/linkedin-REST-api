@@ -2,6 +2,7 @@ licookies.txt
 scratch.py
 venv/
 .idea/
+helpers/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
