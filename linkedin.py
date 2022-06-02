@@ -94,7 +94,7 @@ class LinkedInApi:
             p = {}
             p = p | {'name': person['title']['text']}
             p = p | {'urnfsd': person['image']['attributes'][0]['detailDataUnion']['profilePicture'][19:]}
-            p = p | {'link': person['navigationUrl']}
+            p = p | {'link': person['navigationUrl'].split('?')[0]}
             p = p | {'userid': person['navigationUrl'].split('?mini')[0][28:]}
 
             if person['primarySubtitle'] is not None:
