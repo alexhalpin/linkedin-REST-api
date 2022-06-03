@@ -1,6 +1,7 @@
 import requests
 import http.cookiejar as cookielib
 
+
 class LinkedInApi:
     def __init__(self, cookiepath):
         """
@@ -31,6 +32,14 @@ class LinkedInApi:
         self.cookies = cookies
         self.headers = headers
 
+    def get_request(self, url):
+        """
+            get request using linkedin cookies
+            :param url: url
+            :type url: string
+        """
+        return requests.get(url, headers=self.headers, cookies=self.cookies)
+
     def search_jobs(self, keywords, location='', page=0):
         """
             get a list of jobs from search terms
@@ -55,13 +64,13 @@ class LinkedInApi:
                 continue
 
             j = {}
-            j = j | {'title': job['title']}
-            j = j | {'jobid': job['jobPostingId']}
-            j = j | {'remote': job['workRemoteAllowed']}
-            j = j | {'location': job['formattedLocation']}
-            j = j | {'companyid': job['companyDetails']['company'][29:]}
-            j = j | {'salary': job['formattedSalaryDescription']}
-            j = j | {'time_posted': job['listedAt']}
+            j['title'] = job['title']
+            j['jobid'] = job['jobPostingId']
+            j['remote'] = job['workRemoteAllowed']
+            j['location'] = job['formattedLocation']
+            j['companyid'] = job['companyDetails']['company'][29:]
+            j['salary'] = job['formattedSalaryDescription']
+            j['time_posted'] = job['listedAt']
 
             job_list.append(j)
 
@@ -92,13 +101,13 @@ class LinkedInApi:
                 continue
 
             p = {}
-            p = p | {'name': person['title']['text']}
-            p = p | {'urnfsd': person['image']['attributes'][0]['detailDataUnion']['profilePicture'][19:]}
-            p = p | {'link': person['navigationUrl'].split('?')[0]}
-            p = p | {'userid': person['navigationUrl'].split('?mini')[0][28:]}
+            p['name'] = person['title']['text']
+            p['urnfsd'] = person['image']['attributes'][0]['detailDataUnion']['profilePicture'][19:]
+            p['link'] = person['navigationUrl'].split('?')[0]
+            p['userid'] = person['navigationUrl'].split('?mini')[0][28:]
 
             if person['primarySubtitle'] is not None:
-                p = p | {'title': person['primarySubtitle']['text']}
+                p['title'] = person['primarySubtitle']['text']
 
             person_list.append(p)
 
@@ -118,24 +127,24 @@ class LinkedInApi:
         data = res.json()['included'][0]
 
         p = {}
-        p = p | {'first_name': data['firstName']}
-        p = p | {'last_name': data['lastName']}
-        p = p | {'title': data['headline']}
-        p = p | {'student': data['student']}
-        p = p | {'urnfsd': data['entityUrn'][19:]}
+        p['first_name'] = data['firstName']
+        p['last_name'] = data['lastName']
+        p['title'] = data['headline']
+        p['student'] = data['student']
+        p['urnfsd'] = data['entityUrn'][19:]
 
         email = data['emailAddress']
         if email is not None:
-            p = p | {'emailAddress': email['emailAddress']}
+            p['emailAddress'] = email['emailAddress']
 
         profile_pic = data['profilePicture']
         if profile_pic is not None:
             pfp = profile_pic['displayImage']['artifacts']
             base = profile_pic['displayImage']['rootUrl']
-            p = p | {'pfp100': base+pfp[0]['fileIdentifyingUrlPathSegment']}
-            p = p | {'pfp200': base+pfp[1]['fileIdentifyingUrlPathSegment']}
-            p = p | {'pfp400': base+pfp[2]['fileIdentifyingUrlPathSegment']}
-            p = p | {'pfp800': base+pfp[3]['fileIdentifyingUrlPathSegment']}
+            p['pfp100'] = base+pfp[0]['fileIdentifyingUrlPathSegment']
+            p['pfp200'] = base+pfp[1]['fileIdentifyingUrlPathSegment']
+            p['pfp400'] = base+pfp[2]['fileIdentifyingUrlPathSegment']
+            p['pfp800'] = base+pfp[3]['fileIdentifyingUrlPathSegment']
 
         return p
 
@@ -156,3 +165,22 @@ class LinkedInApi:
         if message != '':
             payload['customMessage'] = message
         return requests.post(url, headers=self.headers, cookies=self.cookies, json=payload)
+
+    def get_company_info(self, companyid):
+        """
+            get company information
+            :param companyid: company id (linkedin.com/in/{companyid}) (unlike userid this is a number)
+            :type companyid: string
+            :rtype dictionary
+        """
+        url = """
+        https://www.linkedin.com/voyager/api/voyagerOrganizationDashCompanies/{companyid}"""
+        formatted_url = url.format(companyid=companyid)
+        res = requests.get(formatted_url, headers=self.headers, cookies=self.cookies)
+        data = res.json()['data']
+
+        c = {}
+        c['name'] = data['name']
+        c['url'] = data['url']
+
+        return c
