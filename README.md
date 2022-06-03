@@ -2,13 +2,13 @@
 # LinkedIn REST Unofficial API (python)
 
 A simple unofficial LinkedIn python api providing basic LinkedIn functionality.
-
+Programmatically find jobs and search for/connect with other users with python 'requests'.
 
 
 ## Setup
 
 Login to LinkedIn in your browser and use a tool like the "Get cookies.txt" chrome addon to save a Netscape format cookie file. 
-This file path will be referenced in instantiations of the LinedInApi class.
+This file path will be referenced in instantiations of the LinkedInApi class.
 
 
 ## Usage/Examples
@@ -35,7 +35,7 @@ job = api.search_jobs('software engineer', location='Palo Alto', page=0)[0]
 ```
 People Search: (returns a list of people)
 ```python
-person = api.search_people('CEO', companyid='112834', page=0)
+person = api.search_people('CEO', companyid='112834', page=0)[0]
 
 # {
 #     'link': 'https://www.linkedin.com/in/richard-hendricks-82872349',
