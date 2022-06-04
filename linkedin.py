@@ -13,16 +13,12 @@ class LinkedInApi:
         cookies.load()
         jsessionid = requests.utils.dict_from_cookiejar(cookies)['JSESSIONID'][1:-1]
         headers = {
-            'cookie': 'lang=v=2&lang=en-us; bcookie="v=2&019bc29f-90a4-4337-8f2d-750f99f20d8d"; bscookie="v=1&2022052913173688d15038-f9ed-47ac-8cbb-7935ac95d6ebAQHz22y4BGn-c_WUWfvGfDQMNsNyef15"; G_ENABLED_IDPS=google; li_at=AQEDATV9OWwCEvuKAAABgQ_3NM8AAAGBNAO4z04AjCcjr_YOFF3vDyNg-nNFFiNbsF6yuRuln55h4-p58Cyx8isi17mdsC8HCbt9Rt4czrBIOW-rkdDo-Nvk9F_gIsopWlHR_MhIN9_1DZHnSMyHz73P; liap=true; JSESSIONID="ajax:2512019846292758628"; timezone=America/New_York; li_theme=light; li_theme_set=app; lidc="b=OB48:s=O:r=O:a=O:p=O:g=2909:u=79:x=1:i=1653853062:t=1653933830:v=2:sig=AQGvJYDq3q27bTyyfVmk7kzAnfIeh7a1"; sdsc=35%3A1%2C1653853111976%7ECONN%2C0%7EJAPP%2C1568679iEyn4yfGN9%2Fx7qH7rHPbSOqFDGg%3D; UserMatchHistory=AQIHaE_whmmBDQAAAYERexv_eYMpvKUmUHropHkSosqxCtlxpkYDKk2dgGJlu1bOD2Jyv0VCJkJ_dqYZGSNNXeGcUwlPoO-vl5VW-WxD6rHsQFgAcU0dKKLOex13RLDmvOBw4FSq1yEmfrWiGn6iw7aIKjJJ02niGbJn_2qZti3--iXuousTHdB0DF4n77TbUixVcWnmaL-5QOh4eQtNww-2HDZeZk29aitxWwTylI4XGoS7yzdhElHBt634gzTpsGkmdxaPsw'
-            ,
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36'
+              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36'
             , 'csrf-token': jsessionid  # this is JSESSIONID cookie
-
             , 'accept-encoding': 'gzip, deflate, br'
             , 'accept-language': 'en-US,en;q=0.9'
             , 'accept': 'application/vnd.linkedin.normalized+json+2.1'
-            ,
-            'referer': 'https://www.linkedin.com/jobs/search/?geoId=103644278&keywords=software&location=United%20States'
+            , 'referer': 'https://www.linkedin.com/jobs/search/?geoId=103644278&keywords=software&location=United%20States'
             , 'x-li-deco-include-micro-schema': 'true'
             , 'x-li-lang': 'en_US'
             # ,'x-li-page-instance': 'urn:li:page:d_flagship3_search_srp_jobs;z8Y2IPCvTn+64syUoMOoOg=='
